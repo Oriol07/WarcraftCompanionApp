@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="@dimen/cv_default_radius"
+    app:cardElevation="@dimen/cv_default_elevation"
+    android:layout_margin="@dimen/l_default_margin"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/l_default_margin"
+        >
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="@dimen/l_default_margin"
+        >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
+
+            <ImageView
+                android:id="@+id/ivPostUserProfile"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_account"
+                />
+
+        </LinearLayout>
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp"
+        >
+
+        <TextView
+            android:id="@+id/tvPostTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Title_placeholder"
+            android:textSize="@dimen/tv_default_title_post"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimaryDark"
+            />
+        <TextView
+            android:id="@+id/tvPostUsername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=" @username"
+            android:textSize="@dimen/tv_username_post"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_marginLeft="@dimen/l_default_margin"
+            />
+    </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorPrimary"
+            />
+        <ImageView
+            android:id="@+id/ivPostImage"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/iv_default"
+            android:src="@drawable/ysera"
+            android:scaleType="centerCrop"
+            />
+    </LinearLayout>
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_margin="@dimen/l_default_margin"
+        >
+            <ImageView
+                android:id="@+id/ivPostLike"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_favorite_border_black"
+                android:scaleType="centerCrop"
+                android:layout_margin="@dimen/iv_icons_margin"
+                />
+            <ImageView
+                android:id="@+id/ivPostComment"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_insert_comment_black"
+                android:scaleType="centerCrop"
+                android:layout_margin="@dimen/iv_icons_margin"
+                />
+            <ImageView
+                android:id="@+id/ivPostShare"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_share_black"
+                android:scaleType="centerCrop"
+                android:layout_margin="@dimen/iv_icons_margin"
+                />
+    </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvPostViewComments"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="View comments"
+            android:textColor="@color/colorViewComments"
+            android:textSize="@dimen/tv_username_post"
+            android:layout_marginLeft="@dimen/l_default_margin"
+            android:layout_marginBottom="@dimen/l_default_margin"
+
+            />
+
+
+
+</LinearLayout>
+
+
+
+</androidx.cardview.widget.CardView>

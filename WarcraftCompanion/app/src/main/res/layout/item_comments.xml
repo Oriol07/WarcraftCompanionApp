@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="@dimen/l_default_margin"
+        >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_margin="@dimen/l_default_margin"
+            >
+
+            <ImageView
+                android:id="@+id/ivPostUserProfile"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_account"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:orientation="vertical"
+            android:layout_margin="@dimen/l_default_margin"
+            >
+
+            <TextView
+                android:id="@+id/tvCommentUsername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" @username"
+                android:textSize="@dimen/tv_username_post"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold"
+                android:layout_marginLeft="@dimen/l_default_margin"
+                />
+            <TextView
+                android:id="@+id/tvCommentComment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Hej, jag heter Oriol, Jag kommer från Katalonien, Jag är lite bög, Jag bor i Matadepera. Jag talar katalanska, engelska, svenska och pyttelite spanska så klart. Jag studerar till videospel programmerare."
+                android:textSize="@dimen/tv_username_post"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_marginLeft="@dimen/l_default_margin"
+                />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+    <View
+        android:layout_marginTop="@dimen/l_default_margin"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimary"
+        />
+
+</LinearLayout>

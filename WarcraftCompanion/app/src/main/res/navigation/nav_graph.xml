@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@+id/navNewsFragment">
+
+    <fragment
+        android:id="@+id/navHomeFragment"
+        android:name="com.oriolcomas.warcraft.view.fragments.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/navNewsFragment"
+        android:name="com.oriolcomas.warcraft.view.fragments.NewsFragment"
+        android:label="fragment_news"
+        tools:layout="@layout/fragment_news" >
+        <action
+            android:id="@+id/action_newsFragment_to_navHomeFragment"
+            app:destination="@id/navHomeFragment" />
+    </fragment>
+
+
+
+</navigation>

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "945305156233",
+    "firebase_url": "https://warcraft-game-companion.firebaseio.com",
+    "project_id": "warcraft-game-companion",
+    "storage_bucket": "warcraft-game-companion.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:945305156233:android:63bb2587d35469976a2458",
+        "android_client_info": {
+          "package_name": "com.oriolcomas.warcraft"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "945305156233-oqdsejg2sje9qascbbp06j31m46bvpfc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.oriolcomas.warcraft",
+            "certificate_hash": "809807af6a1de799f58bf95757ef3c0368c0a0dd"
+          }
+        },
+        {
+          "client_id": "945305156233-tpjgbl8ffgeo3c9efn6dv26q64sfb32v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtfeKyDhNL2310Keegpl1Jl3mhs1tiYEc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "945305156233-tpjgbl8ffgeo3c9efn6dv26q64sfb32v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

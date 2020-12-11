@@ -1,0 +1,26 @@
+<resources>
+
+    <string name="app_name">Warcraft Game Companion</string>
+
+    <!--
+        Menu tabs: screen names
+    -->
+    <string name="nav_home">Home</string>
+    <string name="nav_search">Search</string>
+    <string name="nav_profile">Profile</string>
+    <string name="nav_news">News</string>
+
+
+    <string name="home_title_shadowlands">Shadowlands Arrives November 23</string>
+    <string name="home_text_shadowlands">Greetings heroes of the Horde and the Alliance,
+        On behalf of the entire World of Warcraft team, I’d like to extend a heartfelt thank-you for your patience as we’ve continued to work on Shadowlands, and for all of the words of support after we made the tough decision to delay the game. Today, I’m happy to share that the expansion will be arriving November 23 at 3 p.m. PST (November 24 at 12 a.m. CET).</string>
+    <string name="home_title_celebrateWoW">Celebrate 16 Years of World of Warcraft!</string>
+    <string name="home_text_celebrateWoW">Celebrate 16 years of World of Warcraft with us! Log in between now and November 22 to earn the WoW’s 16th Anniversary achievement, then check your mail for a special Anniversary Gift Package.
+
+Inside the package you’ll find 200 Timewarped Badges, a Celebration Package item to increase experience and reputation gains by 16%, and a “Letter from the Timewalkers,” which will start a new quest leading you to either Orgrimmar or Stormwind.
+
+In addition, questgivers Historian Llore and Historian Ju’pa will have two daily quests that give players a chance to earn additional Timewarped Badges either by answering World of Warcraft trivia or by defeating some familiar foes. Collectors will also have a chance to pick up a few pieces of classic loot from defeating them.</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

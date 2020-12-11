@@ -52,7 +52,7 @@
             android:text="Title_placeholder"
             android:textSize="@dimen/tv_default_title_post"
             android:textStyle="bold"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/colorViewComments"
             />
         <TextView
             android:id="@+id/tvPostUsername"
@@ -60,7 +60,7 @@
             android:layout_height="wrap_content"
             android:text=" @username"
             android:textSize="@dimen/tv_username_post"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/colorViewComments"
             android:layout_marginLeft="@dimen/l_default_margin"
             />
     </LinearLayout>

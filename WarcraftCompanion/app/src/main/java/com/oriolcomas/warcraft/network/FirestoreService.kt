@@ -1,9 +1,12 @@
 package com.oriolcomas.warcraft.network
 
 import android.util.Log
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
 import com.google.firebase.firestore.Query
+import com.google.firebase.ktx.Firebase
 import com.oriolcomas.warcraft.model.Post
 import com.oriolcomas.warcraft.model.User
 
@@ -33,11 +36,11 @@ class FirestoreService  {
                 }
             }
     }
-    fun getUserPosts(callback: Callback<List<Post>>, userID: String)
+    fun getUserPosts(callback: Callback<List<Post>>)
     {
         firebaseFirestore
-            .collection(USERS_COLLECTION_NAME)
-            .whereEqualTo("userId", userID)
+            .collection(POSTS_COLLECTION_NAME)
+            .whereEqualTo("userId", getCurrentUserId())
             .get()
             .addOnSuccessListener { result ->
                 for (doc in result)
@@ -71,6 +74,18 @@ class FirestoreService  {
 
     private fun finish() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    fun getCurrentUserId() : String{
+
+        val user = Firebase.auth.currentUser
+        user?.let {
+
+             val uid = user.uid;
+
+            return uid
+        }
+        return ""
     }
 
 

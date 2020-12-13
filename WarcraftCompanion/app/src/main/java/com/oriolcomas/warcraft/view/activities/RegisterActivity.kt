@@ -99,6 +99,8 @@ class RegisterActivity : AppCompatActivity() {
     {
         //Show Loading
         progressBar.visibility = View.VISIBLE
+        registerButton.isEnabled = false
+
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener {
                 //After 2 seconds, this will ve called with the result
@@ -112,15 +114,17 @@ class RegisterActivity : AppCompatActivity() {
                         user.userId = userId
                         user.username =  username
                         user.avatar = "https://media.mmo-champion.com/images/news/2018/february/WoWIcon17.jpg"
-                        showMessage(R.string.welcome.toString())
+                        showMessage("Welcome!")
                         firestore.setNewUser(user)
                         progressBar.visibility = View.GONE
                         val intent = Intent(this, MainActivity::class.java)
                         startActivity(intent)
+                        registerButton.isEnabled = true;
                     } ?: kotlin.run {
                         Log.e("RegisterActivity", "Error: useriD is null!")
                         showMessage("Error signing up ${it.exception?.message ?: ""}")
                         progressBar.visibility = View.GONE
+                        registerButton.isEnabled = true;
                     }
 
 
@@ -128,6 +132,7 @@ class RegisterActivity : AppCompatActivity() {
                     Log.i("RegisterActivity", "Error: ${it.exception}")
                     showMessage("Error signing up ${it.exception?.message ?: ""}")
                     progressBar.visibility = View.GONE
+                    registerButton.isEnabled = true;
                 }
 
             }

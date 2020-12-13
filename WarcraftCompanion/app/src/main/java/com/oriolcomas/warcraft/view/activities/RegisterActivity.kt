@@ -1,26 +1,37 @@
 package com.oriolcomas.warcraft.view.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ProgressBar
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.oriolcomas.warcraft.R
+import com.oriolcomas.warcraft.model.User
+import com.oriolcomas.warcraft.network.FirestoreService
 
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
+    //private lateinit
 
     private val MIN_PASSWORD_LENGTH = 6
 
     //views
     private lateinit var emailEditText: EditText
+    private lateinit var usernameEditText: EditText
     private lateinit var passwordEditText: EditText
     private lateinit var registerButton: Button
+    private lateinit var progressBar: ProgressBar
+
+    //Firestore
+    var firestore = FirestoreService()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +39,7 @@ class RegisterActivity : AppCompatActivity() {
 
         //Get Firebase Auth
         auth = Firebase.auth
+
 
         //init views
         initViews()
@@ -39,9 +51,11 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun initViews()
     {
-        emailEditText = findViewById<EditText>(R.id.etUsername)
+        usernameEditText = findViewById<EditText>(R.id.etUsername)
+        emailEditText = findViewById<EditText>(R.id.etEmail)
         passwordEditText = findViewById<EditText>(R.id.etPassword)
-        registerButton = findViewById<Button>(R.id.btnSignup)
+        registerButton = findViewById<Button>(R.id.btnRegSignup)
+        progressBar = findViewById<ProgressBar>(R.id.pbRegLoading)
     }
 
 
@@ -53,7 +67,7 @@ class RegisterActivity : AppCompatActivity() {
             {
                 Log.i("RegisterActivity", "Email not valid")
                // showMessage(getString(R.string.invalid_username))
-                findViewById<EditText>(R.id.etUsername).error = getString (R.string.invalid_username)
+                findViewById<EditText>(R.id.etEmail).error = getString (R.string.invalid_username)
                 return@setOnClickListener
             }
 
@@ -67,25 +81,57 @@ class RegisterActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+           val username = usernameEditText.text.toString()
+
 
             //Register user :)
-            auth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener {
-                    //After 2 seconds, this will ve called with the result
-                    if (it.isSuccessful) {
-                        Log.i("RegisterActivity", "User Registered!")
-                    } else {
-                        Log.i("RegisterActivity", "Error: ${it.exception}")
-                        showMessage("Error signing up ${it.exception?.message ?: ""}")
-                    }
+            registerUser(email, username, password)
 
-                }
 
             //Do other things
             //..
 
 
         }
+    }
+
+    private fun registerUser(email:String, username: String, password: String)
+    {
+        //Show Loading
+        progressBar.visibility = View.VISIBLE
+        auth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener {
+                //After 2 seconds, this will ve called with the result
+                if (it.isSuccessful) {
+                    Log.i("RegisterActivity", "User Registered!")
+                    //showMessage("${R.string.welcome.toString()}")
+                    auth.currentUser?.uid?.let{userId ->
+
+                        // Create User Model
+                       var user = User()
+                        user.userId = userId
+                        user.username =  username
+                        user.avatar = "https://media.mmo-champion.com/images/news/2018/february/WoWIcon17.jpg"
+                        showMessage(R.string.welcome.toString())
+                        firestore.setNewUser(user)
+                        progressBar.visibility = View.GONE
+                        val intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
+                    } ?: kotlin.run {
+                        Log.e("RegisterActivity", "Error: useriD is null!")
+                        showMessage("Error signing up ${it.exception?.message ?: ""}")
+                        progressBar.visibility = View.GONE
+                    }
+
+
+                } else {
+                    Log.i("RegisterActivity", "Error: ${it.exception}")
+                    showMessage("Error signing up ${it.exception?.message ?: ""}")
+                    progressBar.visibility = View.GONE
+                }
+
+            }
+
     }
 
     private fun isEmailValid(email: String) : Boolean {
@@ -104,7 +150,6 @@ class RegisterActivity : AppCompatActivity() {
     }
     private fun isPasswordValid(password: String) : Boolean {
 
-        val passwordRegex = "[a-zA-Z0-9-.]";
         return password.isNotBlank()
                 && password.count() >= MIN_PASSWORD_LENGTH
                 && containsLetterAndNumber(password)

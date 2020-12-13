@@ -3,7 +3,7 @@
     <color name="colorPrimary">#0A0A0A</color>
     <color name="colorSecondary">#F5F5F5</color>
     <color name="colorPrimaryDark">#1A1818</color>
-    <color name="colorAccent">#F8F8FF</color>
+    <color name="colorAccent">#FFC107</color>
     <color name="colorViewComments">#222121</color>
     <color name="colorLoginButtons">#79DBDBDB</color>
 

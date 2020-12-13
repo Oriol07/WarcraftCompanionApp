@@ -52,6 +52,29 @@ class FirestoreService  {
             }
     }
 
+    fun getUser(userId: String, resultListener: ((User?)) ->Unit)
+    {
+       firebaseFirestore
+           .collection(USERS_COLLECTION_NAME)
+           .document(userId)
+           .get()
+           .addOnSuccessListener {result ->
+                if (result != null) {
+                     val user = result.toObject(User::class.java)
+                    Log.d("GetUser", "DocumentSnapshot user: ${user!!.username}") //Donà bé! p
+                    resultListener(user)
+                } else {
+                    Log.d("GetUser", "No such document")
+                    resultListener(null)
+                }
+            }
+                .addOnFailureListener { exception ->
+                    Log.d("GetUser", "get failed with ", exception)
+                    resultListener(null)
+                }
+    }
+
+
     fun setNewUser( user: User)
     {
 

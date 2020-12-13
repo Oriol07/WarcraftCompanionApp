@@ -74,7 +74,7 @@
         android:layout_marginTop="@dimen/btn_ggFbTw"
         android:layout_marginEnd="48dp"
         android:text="@string/action_log_in"
-        app:layout_constraintBottom_toBottomOf="@id/btnSignup"
+        app:layout_constraintBottom_toBottomOf="@id/btnLogSignup"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etLogPassword"
@@ -82,7 +82,7 @@
 
     <!--    SignUp -->
     <Button
-        android:id="@+id/btnSignup"
+        android:id="@+id/btnLogSignup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
@@ -108,7 +108,7 @@
         app:layout_constraintEnd_toEndOf="@id/btnGoogleSignUp"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnSignup" />
+        app:layout_constraintTop_toBottomOf="@+id/btnLogSignup" />
 
     <!--    Google -->
 
@@ -124,7 +124,7 @@
         app:layout_constraintEnd_toEndOf="@id/btnTwitterSignUp"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="@id/btnFacebookSignUp"
-        app:layout_constraintTop_toBottomOf="@+id/btnSignup" />
+        app:layout_constraintTop_toBottomOf="@+id/btnLogSignup" />
 
     <!--    Twitter -->
     <ImageButton
@@ -139,22 +139,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="@id/btnGoogleSignUp"
-        app:layout_constraintTop_toBottomOf="@+id/btnSignup" />
+        app:layout_constraintTop_toBottomOf="@+id/btnLogSignup" />
 
     <ProgressBar
-        android:id="@+id/loading"
+        android:id="@+id/pbLogloading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="64dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="64dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/etPassword"
-        app:layout_constraintStart_toStartOf="@+id/etLogPassword"
-        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/etLogPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/btnLogin"
         app:layout_constraintVertical_bias="0.3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

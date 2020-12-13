@@ -119,6 +119,7 @@ class RegisterActivity : AppCompatActivity() {
                         progressBar.visibility = View.GONE
                         val intent = Intent(this, MainActivity::class.java)
                         startActivity(intent)
+                        finish()
                         registerButton.isEnabled = true;
                     } ?: kotlin.run {
                         Log.e("RegisterActivity", "Error: useriD is null!")

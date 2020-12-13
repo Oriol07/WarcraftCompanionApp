@@ -4,11 +4,10 @@ import java.io.Serializable
 import java.util.*
 
 class Post : Serializable {
-
-    lateinit var image: String
-    lateinit var title: String
-    lateinit var username: String
-    lateinit var userId: String
+    var image: String = ""
+    var title: String = ""
+    var username: String = ""
+   var userId: String = ""
 
 
 }

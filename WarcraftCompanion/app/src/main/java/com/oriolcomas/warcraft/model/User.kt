@@ -4,8 +4,8 @@ import java.io.Serializable
 
 class User() : Serializable {
 
-    lateinit var userId: String
-    lateinit var username: String
-    lateinit var avatar: String
+    var userId: String = ""
+    var username: String = ""
+    var avatar: String = ""
 
 }

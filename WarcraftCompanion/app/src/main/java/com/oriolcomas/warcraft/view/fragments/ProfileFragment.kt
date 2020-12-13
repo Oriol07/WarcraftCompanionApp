@@ -17,6 +17,7 @@ import com.oriolcomas.warcraft.view.adapter.ProfileAdapter
 import com.oriolcomas.warcraft.view.adapter.ProfileListener
 import com.oriolcomas.warcraft.viewmodel.ProfileViewModel
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_profile.*
 
 
 class ProfileFragment : Fragment(), ProfileListener {
@@ -35,7 +36,7 @@ class ProfileFragment : Fragment(), ProfileListener {
 
         profileAdapter = ProfileAdapter(this)
 
-        rvPost.apply {
+        rvProfilePost.apply {
             layoutManager = LinearLayoutManager(view.context, LinearLayoutManager.VERTICAL, false)
             adapter = profileAdapter
         }
@@ -47,7 +48,7 @@ class ProfileFragment : Fragment(), ProfileListener {
         viewModel.listPosts.observe(this, Observer<List<Post>>{ post -> profileAdapter.updateData(post)})
         viewModel.isLoading.observe(this, Observer<Boolean> {
             if (it != null)
-                rlBasePost.visibility = View.INVISIBLE
+                rlBaseProfile.visibility = View.INVISIBLE
         })
     }
 

@@ -1,5 +1,6 @@
 package com.oriolcomas.warcraft.view.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,12 +8,17 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.oriolcomas.warcraft.model.Post
 import com.oriolcomas.warcraft.R
+import com.oriolcomas.warcraft.model.User
+import com.oriolcomas.warcraft.network.FirestoreService
 
 class HomeAdapter(val homeListener: HomeListener) : RecyclerView.Adapter<HomeAdapter.ViewHolder>(){
 
     var listPosts = ArrayList<Post>()
+
+    val firestoreService = FirestoreService()
 
     //Crear o decir cual sera el diseño usado para nuestras listas // En aquest cas volem el disseny del layout item_post.xml
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(
@@ -24,14 +30,28 @@ class HomeAdapter(val homeListener: HomeListener) : RecyclerView.Adapter<HomeAda
     //Les dades que anem a carregar
     override fun onBindViewHolder(holder: HomeAdapter.ViewHolder, position: Int) {
         val post = listPosts[position]
+       // val user
 
         holder.tvTitle.text = post.title
-        holder.tvUsername.text= post.username 
+        firestoreService.getUser(post.userId)
+        {
+            user: User? ->
+            holder.tvUsername.text= user?.username
+            Glide.with(holder.itemView.context)
+                .load(user?.avatar)
+                .apply(RequestOptions.circleCropTransform()) // posar forma circular
+                .into(holder.ivUserAvatar)
+
+        }
+
 
         Glide.with(holder.itemView.context)
             .load(post.image)
-            //.apply(RequestOptions.circleCropTransform()) //Aixó per la foto del Usuari no d'aquest
             .into(holder.ivImagePost)
+
+
+
+        Log.d("GetUser", " avatar is ${firestoreService.getAvatar(post.userId)}")
 
         holder.itemView.setOnClickListener{
             homeListener.onHomeClicked(post, position)
@@ -52,6 +72,7 @@ class HomeAdapter(val homeListener: HomeListener) : RecyclerView.Adapter<HomeAda
         var tvTitle = itemView.findViewById<TextView>(R.id.tvPostTitle)
         var tvUsername = itemView.findViewById<TextView>(R.id.tvPostUsername)
         var ivImagePost = itemView.findViewById<ImageView>(R.id.ivPostImage)
+        var ivUserAvatar = itemView.findViewById<ImageView>(R.id.ivPostUserProfile)
       //  var tvViewComments = itemView.findViewById<ImageView>(R.id.tvPostViewComments)
 
     }

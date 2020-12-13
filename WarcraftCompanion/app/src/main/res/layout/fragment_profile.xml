@@ -72,7 +72,7 @@
             >
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvProfile"
+                android:id="@+id/rvProfilePost"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 />

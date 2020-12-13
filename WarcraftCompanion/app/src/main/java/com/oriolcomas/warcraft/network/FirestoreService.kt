@@ -26,6 +26,7 @@ class FirestoreService  {
     fun getPosts(callback: Callback<List<Post>>)
     {
         firebaseFirestore.collection(POSTS_COLLECTION_NAME)
+            .orderBy("date", Query.Direction.DESCENDING)
             .get()
             .addOnSuccessListener { result ->
                 for (doc in result)
@@ -74,6 +75,9 @@ class FirestoreService  {
                 }
     }
 
+    fun setNewPost(post: Post) {
+        firebaseFirestore.collection(POSTS_COLLECTION_NAME).document().set(post)
+    }
 
     fun setNewUser( user: User)
     {

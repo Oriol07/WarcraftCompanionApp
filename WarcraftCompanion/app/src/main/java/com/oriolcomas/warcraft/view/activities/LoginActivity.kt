@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
@@ -95,6 +96,10 @@ class LoginActivity : AppCompatActivity() {
 
     private fun login(email: String, password: String)
     {
+        //Show Loading
+        progressBar.visibility = View.VISIBLE
+        loginButton.isEnabled = false
+
        auth.signInWithEmailAndPassword(email, password)
            .addOnCompleteListener {
                //After 2 seconds, this will ve called with the result
@@ -103,11 +108,16 @@ class LoginActivity : AppCompatActivity() {
                    showMessage("Welcome!")
                    val intent = Intent(this, MainActivity::class.java)
                    startActivity(intent)
+                   //Show Loading
+                   progressBar.visibility = View.GONE
+                   loginButton.isEnabled = true
                    finish()
                }
                else {
                    Log.i("RegisterActivity", "Error: ${it.exception}")
                    showMessage("Error signing in ${it.exception?.message ?: ""}")
+                   progressBar.visibility = View.GONE
+                   loginButton.isEnabled = true
                }
            }
 

@@ -7,7 +7,8 @@ class Post : Serializable {
     var image: String = ""
     var title: String = ""
     var username: String = ""
-   var userId: String = ""
+    var userId: String = ""
+    lateinit var date: Date
 
 
 }

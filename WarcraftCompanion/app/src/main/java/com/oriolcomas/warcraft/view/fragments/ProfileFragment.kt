@@ -1,5 +1,6 @@
 package com.oriolcomas.warcraft.view.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
@@ -14,11 +15,15 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 import com.oriolcomas.warcraft.R
 import com.oriolcomas.warcraft.model.Post
 import com.oriolcomas.warcraft.model.User
 import com.oriolcomas.warcraft.network.FirestoreService
+import com.oriolcomas.warcraft.view.activities.LoginActivity
+import com.oriolcomas.warcraft.view.activities.MainActivity
 import com.oriolcomas.warcraft.view.adapter.ProfileAdapter
 import com.oriolcomas.warcraft.view.adapter.ProfileListener
 import com.oriolcomas.warcraft.viewmodel.ProfileViewModel
@@ -32,7 +37,9 @@ class ProfileFragment : Fragment(), ProfileListener {
 
     private lateinit var ivProfileUserAvatar: ImageView
     private lateinit var ivProfileUsername: TextView
+    private lateinit var ibExit: ImageButton
     val firestoreService = FirestoreService()
+
 
 
 
@@ -57,7 +64,17 @@ class ProfileFragment : Fragment(), ProfileListener {
         observeViewModel()
 
         initViews(view)
+        initListeners(view)
 
+    }
+
+    private fun initListeners(view: View) {
+        ibExit.setOnClickListener {
+            Firebase.auth.signOut()
+            val intent = Intent(activity, LoginActivity::class.java)
+            activity?.finish()
+            startActivity(intent)
+        }
     }
 
     fun observeViewModel()
@@ -73,6 +90,7 @@ class ProfileFragment : Fragment(), ProfileListener {
     {
         ivProfileUserAvatar = itemView.findViewById<ImageView>(R.id.ivProfileUserAvatar)
         ivProfileUsername = itemView.findViewById<TextView>(R.id.tvProfileUsername)
+        ibExit = itemView.findViewById<ImageButton>(R.id.ibExit)
 
         firestoreService.getUser(firestoreService.getCurrentUserId())
         {
@@ -84,6 +102,8 @@ class ProfileFragment : Fragment(), ProfileListener {
                 .into(ivProfileUserAvatar)
         }
     }
+
+
 
 
 

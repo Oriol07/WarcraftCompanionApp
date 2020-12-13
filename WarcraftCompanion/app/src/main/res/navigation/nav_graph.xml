@@ -27,7 +27,16 @@
         android:id="@+id/navProfileFragment"
         android:name="com.oriolcomas.warcraft.view.fragments.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_navProfileFragment_to_addPostFragment"
+            app:destination="@id/navAddPostFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/navAddPostFragment"
+        android:name="com.oriolcomas.warcraft.view.fragments.AddPostFragment"
+        android:label="fragment_add_post"
+        tools:layout="@layout/fragment_add_post" />
 
 
 </navigation>

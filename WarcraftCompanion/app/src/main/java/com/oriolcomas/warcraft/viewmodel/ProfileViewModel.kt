@@ -31,6 +31,8 @@ class ProfileViewModel : ViewModel() {
         })
     }
 
+
+
     fun processFinished()
     {
         isLoading.value = true

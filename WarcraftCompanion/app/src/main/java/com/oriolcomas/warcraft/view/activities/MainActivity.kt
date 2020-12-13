@@ -22,7 +22,6 @@ class MainActivity : AppCompatActivity() {
         configNav()
 
 
-
     }
 
     private fun configNav() {

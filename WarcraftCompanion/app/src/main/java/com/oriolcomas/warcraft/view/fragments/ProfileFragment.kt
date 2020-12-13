@@ -2,17 +2,23 @@ package com.oriolcomas.warcraft.view.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.*
 
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 
 import com.oriolcomas.warcraft.R
 import com.oriolcomas.warcraft.model.Post
+import com.oriolcomas.warcraft.model.User
+import com.oriolcomas.warcraft.network.FirestoreService
 import com.oriolcomas.warcraft.view.adapter.ProfileAdapter
 import com.oriolcomas.warcraft.view.adapter.ProfileListener
 import com.oriolcomas.warcraft.viewmodel.ProfileViewModel
@@ -24,8 +30,16 @@ class ProfileFragment : Fragment(), ProfileListener {
     private lateinit var profileAdapter: ProfileAdapter
     private lateinit var viewModel: ProfileViewModel
 
+    private lateinit var ivProfileUserAvatar: ImageView
+    private lateinit var ivProfileUsername: TextView
+    val firestoreService = FirestoreService()
+
+
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? { return inflater.inflate(R.layout.fragment_profile, container, false) }
+
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -42,7 +56,10 @@ class ProfileFragment : Fragment(), ProfileListener {
         }
         observeViewModel()
 
+        initViews(view)
+
     }
+
     fun observeViewModel()
     {
         viewModel.listPosts.observe(this, Observer<List<Post>>{ post -> profileAdapter.updateData(post)})
@@ -50,6 +67,22 @@ class ProfileFragment : Fragment(), ProfileListener {
             if (it != null)
                 rlBaseProfile.visibility = View.INVISIBLE
         })
+    }
+
+    private fun initViews(itemView: View)
+    {
+        ivProfileUserAvatar = itemView.findViewById<ImageView>(R.id.ivProfileUserAvatar)
+        ivProfileUsername = itemView.findViewById<TextView>(R.id.tvProfileUsername)
+
+        firestoreService.getUser(firestoreService.getCurrentUserId())
+        {
+            user: User? ->
+            ivProfileUsername.text = user?.username
+            Glide.with(itemView.context)
+                .load(user?.avatar)
+                .apply(RequestOptions.circleCropTransform()) // posar forma circular
+                .into(ivProfileUserAvatar)
+        }
     }
 
 

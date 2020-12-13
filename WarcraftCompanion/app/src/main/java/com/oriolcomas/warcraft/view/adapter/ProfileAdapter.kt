@@ -15,7 +15,7 @@ class ProfileAdapter(val profileListener: ProfileListener) : RecyclerView.Adapte
 
     //Crear o decir cual sera el diseño usado para nuestras listas // En aquest cas volem el disseny del layout item_post.xml
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(
-    LayoutInflater.from(parent.context).inflate(R.layout.item_post, parent, false))
+    LayoutInflater.from(parent.context).inflate(R.layout.item_profile_post, parent, false))
 
     //Quants elements tenim
     override fun getItemCount() = listPosts.size
@@ -25,7 +25,6 @@ class ProfileAdapter(val profileListener: ProfileListener) : RecyclerView.Adapte
         val post = listPosts[position]
 
         holder.tvTitle.text = post.title
-        holder.tvUsername.text= post.username
 
         Glide.with(holder.itemView.context)
             .load(post.image)
@@ -49,7 +48,6 @@ class ProfileAdapter(val profileListener: ProfileListener) : RecyclerView.Adapte
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
     {
         var tvTitle = itemView.findViewById<TextView>(R.id.tvPostTitle)
-        var tvUsername = itemView.findViewById<TextView>(R.id.tvPostUsername)
         var ivImagePost = itemView.findViewById<ImageView>(R.id.ivPostImage)
         //  var tvViewComments = itemView.findViewById<ImageView>(R.id.tvPostViewComments)
 

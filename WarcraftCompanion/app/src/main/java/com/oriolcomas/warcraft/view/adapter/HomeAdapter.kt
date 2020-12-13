@@ -50,9 +50,6 @@ class HomeAdapter(val homeListener: HomeListener) : RecyclerView.Adapter<HomeAda
             .into(holder.ivImagePost)
 
 
-
-        Log.d("GetUser", " avatar is ${firestoreService.getAvatar(post.userId)}")
-
         holder.itemView.setOnClickListener{
             homeListener.onHomeClicked(post, position)
         }

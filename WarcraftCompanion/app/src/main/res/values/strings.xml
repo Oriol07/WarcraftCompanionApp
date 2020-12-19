@@ -46,5 +46,6 @@ In addition, questgivers Historian Llore and Historian Ju’pa will have two dai
     <string name="prompt_image">example.com/images/file.jpg</string>
     <string name="prompt_title">Title</string>
     <string name="action_add_post">Add post</string>
+    <string name="invalid_title">Title is empty</string>
 
 </resources>

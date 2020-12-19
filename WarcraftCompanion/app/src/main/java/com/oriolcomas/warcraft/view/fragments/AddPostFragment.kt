@@ -1,14 +1,12 @@
 package com.oriolcomas.warcraft.view.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.oriolcomas.warcraft.R
@@ -23,6 +21,7 @@ class AddPostFragment : Fragment() {
     lateinit var etImageLink: EditText
     lateinit var etTitlePost: EditText
     lateinit var btnAddPost: Button
+    lateinit var pbAddPostLoading: ProgressBar
 
     val firestoreService = FirestoreService()
 
@@ -45,9 +44,22 @@ class AddPostFragment : Fragment() {
         btnAddPost.setOnClickListener{
             val title = etTitlePost.text.toString()
             //TODO: check if title is valid!
+            if (!isTitleValid(title))
+            {
+                Log.i("AddPostFragment", "Title is empty")
+                // showMessage(getString(R.string.invalid_password))
+                itemView.findViewById<EditText>(R.id.etTitlePost).error = getString (R.string.invalid_title)
+                return@setOnClickListener
+            }
 
             val image = etImageLink.text.toString()
             //TODO: check if image is valid
+            if (!isImageValid(image))
+            {
+                Log.i("AddPostFragment", "Image is not valid")
+                itemView.findViewById<EditText>(R.id.etImageLink).error = getString (R.string.invalid_title)
+                return@setOnClickListener
+            }
 
             addPost(title, image)
 
@@ -60,11 +72,16 @@ class AddPostFragment : Fragment() {
         etTitlePost = itemView.findViewById<EditText>(R.id.etTitlePost)
         etImageLink = itemView.findViewById<EditText>(R.id.etImageLink)
         btnAddPost = itemView.findViewById<Button>(R.id.btnAddPost)
+        pbAddPostLoading = itemView.findViewById<ProgressBar>(R.id.pbAddPostLoading)
 
 
     }
 
     private fun addPost(title: String, image: String) {
+        //Show Loading
+        pbAddPostLoading.visibility = View.VISIBLE
+        btnAddPost.isEnabled = false
+
         firestoreService.getUser(firestoreService.getCurrentUserId())
         {
             user: User? ->
@@ -80,6 +97,17 @@ class AddPostFragment : Fragment() {
             firestoreService.setNewPost(newPost)
 
         }
+    }
+
+    private fun isTitleValid(title: String) : Boolean {
+        return title.isNotBlank()
+    }
+    private fun isImageValid(image: String) : Boolean {
+        val imageRegex = "([^\\s]+(\\.(?i)(jpe?g|png|gif|bmp))$)"
+
+
+        return image.isNotBlank()
+                && image.contains(Regex(imageRegex))
     }
 
 }

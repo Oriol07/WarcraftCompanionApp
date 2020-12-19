@@ -1,17 +1,21 @@
 package com.oriolcomas.warcraft.view.fragments
 
+import android.app.ActivityManager
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ProgressBar
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.oriolcomas.warcraft.R
 import com.oriolcomas.warcraft.model.Post
 import com.oriolcomas.warcraft.model.User
+import com.oriolcomas.warcraft.network.Callback
 import com.oriolcomas.warcraft.network.FirestoreService
 import java.util.*
 
@@ -94,7 +98,24 @@ class AddPostFragment : Fragment() {
             newPost.date = Calendar.getInstance().time
 
             //New Post :)
-            firestoreService.setNewPost(newPost)
+            firestoreService.setNewPost(newPost, object: Callback<Post>{
+                override fun onSuccess(result: Post?) {
+                    pbAddPostLoading.visibility = View.GONE
+                    btnAddPost.isEnabled = true
+                    showMessage(getString(R.string.add_post))
+                    etTitlePost.getText().clear()
+                    etImageLink.getText().clear()
+
+                }
+
+                override fun onFailed(exception: Exception) {
+                    pbAddPostLoading.visibility = View.GONE
+                    btnAddPost.isEnabled = true
+                    showMessage(getString(R.string.add_post_error))
+
+                }
+            })
+
 
         }
     }
@@ -108,6 +129,12 @@ class AddPostFragment : Fragment() {
 
         return image.isNotBlank()
                 && image.contains(Regex(imageRegex))
+    }
+
+    private fun showMessage(text: String)
+    {
+
+        Toast.makeText(getActivity(), text, Toast.LENGTH_LONG).show()
     }
 
 }

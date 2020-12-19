@@ -76,8 +76,17 @@ class FirestoreService  {
                 }
     }
 
-    fun setNewPost(post: Post) {
+    fun setNewPost(post: Post, callback: Callback<Post>) {
         firebaseFirestore.collection(POSTS_COLLECTION_NAME).document().set(post)
+            .addOnSuccessListener {
+                Log.d("SetNewPost", "Post successfully created!")
+                callback.onSuccess(post)
+            }
+            .addOnFailureListener {
+                    e -> Log.w("SetNewPost", "Error creating document", e)
+                    callback.onFailed(e);
+            }
+
     }
 
     fun setNewUser( user: User)

@@ -6,6 +6,7 @@
     <color name="colorAccent">#FFC107</color>
     <color name="colorViewComments">#222121</color>
     <color name="colorLoginButtons">#79DBDBDB</color>
+    <color name="colorHintText">#AEAAAA</color>
 
     <color name="colorWhite">#FFFF</color>
 

@@ -26,6 +26,8 @@ class ProfileAdapter(val profileListener: ProfileListener) : RecyclerView.Adapte
 
         holder.tvTitle.text = post.title
 
+        holder.tvProfilePostDate.text = post.date.toString()
+
         Glide.with(holder.itemView.context)
             .load(post.image)
             //.apply(RequestOptions.circleCropTransform()) //Aixó per la foto del Usuari no d'aquest
@@ -49,6 +51,7 @@ class ProfileAdapter(val profileListener: ProfileListener) : RecyclerView.Adapte
     {
         var tvTitle = itemView.findViewById<TextView>(R.id.tvPostTitle)
         var ivImagePost = itemView.findViewById<ImageView>(R.id.ivPostImage)
+        var tvProfilePostDate = itemView.findViewById<TextView>(R.id.tvProfilePostDate)
         //  var tvViewComments = itemView.findViewById<ImageView>(R.id.tvPostViewComments)
 
     }

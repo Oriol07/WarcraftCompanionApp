@@ -42,6 +42,7 @@ class FirestoreService  {
         firebaseFirestore
             .collection(POSTS_COLLECTION_NAME)
             .whereEqualTo("userId", getCurrentUserId())
+            .orderBy("date", Query.Direction.DESCENDING)
             .get()
             .addOnSuccessListener { result ->
                 for (doc in result)

@@ -1,11 +1,14 @@
 package com.oriolcomas.warcraft.view.adapter
 
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -13,6 +16,9 @@ import com.oriolcomas.warcraft.model.Post
 import com.oriolcomas.warcraft.R
 import com.oriolcomas.warcraft.model.User
 import com.oriolcomas.warcraft.network.FirestoreService
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class HomeAdapter(val homeListener: HomeListener) : RecyclerView.Adapter<HomeAdapter.ViewHolder>(){
 
@@ -44,6 +50,14 @@ class HomeAdapter(val homeListener: HomeListener) : RecyclerView.Adapter<HomeAda
 
         }
 
+        val simpleDateFormat = ("HH:mm")
+
+        val cal = Calendar.getInstance()
+        cal.time = post.date
+
+        holder.tvDatePost.text = post.date.toString()
+
+
 
         Glide.with(holder.itemView.context)
             .load(post.image)
@@ -53,6 +67,8 @@ class HomeAdapter(val homeListener: HomeListener) : RecyclerView.Adapter<HomeAda
         holder.itemView.setOnClickListener{
             homeListener.onHomeClicked(post, position)
         }
+
+
 
     }
 
@@ -70,7 +86,8 @@ class HomeAdapter(val homeListener: HomeListener) : RecyclerView.Adapter<HomeAda
         var tvUsername = itemView.findViewById<TextView>(R.id.tvPostUsername)
         var ivImagePost = itemView.findViewById<ImageView>(R.id.ivPostImage)
         var ivUserAvatar = itemView.findViewById<ImageView>(R.id.ivPostUserProfile)
-      //  var tvViewComments = itemView.findViewById<ImageView>(R.id.tvPostViewComments)
+        var tvDatePost = itemView.findViewById<TextView>(R.id.tvDatePost)
+
 
     }
 

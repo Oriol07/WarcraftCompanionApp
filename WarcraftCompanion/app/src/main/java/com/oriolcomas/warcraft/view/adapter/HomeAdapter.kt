@@ -55,7 +55,7 @@ class HomeAdapter(val homeListener: HomeListener) : RecyclerView.Adapter<HomeAda
         val cal = Calendar.getInstance()
         cal.time = post.date
 
-        holder.tvDatePost.text = post.date.toString()
+        holder.tvDatePost.text = getDateTime(post.date)
 
 
 
@@ -65,6 +65,7 @@ class HomeAdapter(val homeListener: HomeListener) : RecyclerView.Adapter<HomeAda
 
 
         holder.itemView.setOnClickListener{
+            //TODO al fer click anar a perfil
             homeListener.onHomeClicked(post, position)
         }
 
@@ -89,6 +90,13 @@ class HomeAdapter(val homeListener: HomeListener) : RecyclerView.Adapter<HomeAda
         var tvDatePost = itemView.findViewById<TextView>(R.id.tvDatePost)
 
 
+    }
+
+    private fun getDateTime(date: Date): String? {
+        val sdf = SimpleDateFormat("dd/MM/yy hh:mm a")
+        val netDate = date
+        val date = sdf.format(netDate)
+        return date.toString()
     }
 
 }

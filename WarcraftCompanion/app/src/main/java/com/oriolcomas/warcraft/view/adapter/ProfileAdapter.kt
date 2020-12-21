@@ -9,6 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.oriolcomas.warcraft.R
 import com.oriolcomas.warcraft.model.Post
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class ProfileAdapter(val profileListener: ProfileListener) : RecyclerView.Adapter<ProfileAdapter.ViewHolder>(){
     var listPosts = ArrayList<Post>()
@@ -26,7 +29,7 @@ class ProfileAdapter(val profileListener: ProfileListener) : RecyclerView.Adapte
 
         holder.tvTitle.text = post.title
 
-        holder.tvProfilePostDate.text = post.date.toString()
+        holder.tvProfilePostDate.text = getDateTime(post.date)
 
         Glide.with(holder.itemView.context)
             .load(post.image)
@@ -54,6 +57,13 @@ class ProfileAdapter(val profileListener: ProfileListener) : RecyclerView.Adapte
         var tvProfilePostDate = itemView.findViewById<TextView>(R.id.tvProfilePostDate)
         //  var tvViewComments = itemView.findViewById<ImageView>(R.id.tvPostViewComments)
 
+    }
+
+    private fun getDateTime(date: Date): String? {
+        val sdf = SimpleDateFormat("dd/MM/yy hh:mm a")
+        val netDate = date
+        val date = sdf.format(netDate)
+        return date.toString()
     }
 
 

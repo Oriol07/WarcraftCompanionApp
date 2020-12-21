@@ -7,12 +7,14 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
 import com.google.firebase.firestore.Query
 import com.google.firebase.ktx.Firebase
+import com.oriolcomas.warcraft.model.News
 import com.oriolcomas.warcraft.model.Post
 import com.oriolcomas.warcraft.model.User
 
 
 const val POSTS_COLLECTION_NAME = "post"
 const val USERS_COLLECTION_NAME = "users"
+const val NEWS_COLLECTION_NAME = "news"
 
 class FirestoreService  {
 
@@ -37,6 +39,22 @@ class FirestoreService  {
                 }
             }
     }
+
+    fun getNews(callback: Callback<List<News>>)
+    {
+        firebaseFirestore.collection(NEWS_COLLECTION_NAME)
+            .orderBy("date", Query.Direction.DESCENDING)
+            .get()
+            .addOnSuccessListener { result ->
+                for (doc in result)
+                {
+                    val list = result.toObjects(News::class.java)
+                    callback.onSuccess(list)
+                    break
+                }
+            }
+    }
+
     fun getUserPosts(callback: Callback<List<Post>>)
     {
         firebaseFirestore

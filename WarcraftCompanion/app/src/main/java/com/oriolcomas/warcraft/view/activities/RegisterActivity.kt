@@ -17,6 +17,7 @@ import com.oriolcomas.warcraft.model.User
 import com.oriolcomas.warcraft.network.FirestoreService
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
+import com.google.firebase.analytics.ktx.analytics
 
 
 class RegisterActivity : AppCompatActivity() {
@@ -64,6 +65,10 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun initListeners() {
         registerButton.setOnClickListener {
+
+            //Track register button click
+            Firebase.analytics.logEvent("registerButtonClick", null)
+
             //Get email and password from EditTexts.
             val email = emailEditText.text.toString()
             if (!isEmailValid(email))

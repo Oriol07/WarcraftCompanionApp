@@ -2,11 +2,13 @@ package com.oriolcomas.warcraft.view.fragments
 
 import android.app.ActivityManager
 import android.content.Context
+import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
@@ -136,5 +138,6 @@ class AddPostFragment : Fragment() {
 
         Toast.makeText(getActivity(), text, Toast.LENGTH_LONG).show()
     }
+
 
 }

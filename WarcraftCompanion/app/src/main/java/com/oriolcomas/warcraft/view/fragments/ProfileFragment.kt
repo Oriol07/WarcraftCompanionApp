@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.facebook.login.LoginManager
+import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -70,6 +71,7 @@ class ProfileFragment : Fragment(){
 
     private fun initListeners(view: View) {
         ibExit.setOnClickListener {
+            Firebase.analytics.logEvent("SignOutClick", null)
             Firebase.auth.signOut()
             LoginManager.getInstance().logOut();
 

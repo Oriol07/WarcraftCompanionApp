@@ -17,6 +17,7 @@ import com.facebook.appevents.AppEventsLogger
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import com.facebook.login.widget.LoginButton
+import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -97,6 +98,8 @@ class LoginActivity : AppCompatActivity() {
 
     private fun initListeners() {
         loginButton.setOnClickListener{
+            //Track login button click
+            Firebase.analytics.logEvent("loginButtonClick", null)
             val email = emailEditText.text.toString()
             if (!isEmailValid(email))
             {
@@ -217,6 +220,9 @@ class LoginActivity : AppCompatActivity() {
                     val credential = FacebookAuthProvider.getCredential(token.token)
 
                     FirebaseAuth.getInstance().signInWithCredential(credential).addOnCompleteListener{
+                        //Track login facebook button click
+                        Firebase.analytics.logEvent("loginButtonFacebookClick", null)
+
                         if (it.isSuccessful) {
                             Log.i("FacebookLogin", "User Loged!")
                             showMessage("Welcome!")

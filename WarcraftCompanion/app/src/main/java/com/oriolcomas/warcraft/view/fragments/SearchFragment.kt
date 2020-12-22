@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.facebook.login.LoginManager
+import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.oriolcomas.warcraft.R
@@ -67,6 +68,7 @@ class SearchFragment : Fragment(){
     private fun initListeners(view: View) {
 
         ibSearch.setOnClickListener {
+            Firebase.analytics.logEvent("SearchButtonClick", null)
             viewModel.refresh(etSearch.text.toString())
             Log.i("SearchFragment", "Username: ${etSearch.text.toString()}")
         }
@@ -74,10 +76,9 @@ class SearchFragment : Fragment(){
 
     fun observeViewModel()
     {
-        viewModel.listUsers.observe(this, Observer<List<User>>{ post -> searchAdapter.updateData(post)})
+        viewModel.listUsers.observe(this, Observer<List<User>>{ user -> searchAdapter.updateData(user)})
         viewModel.isLoading.observe(this, Observer<Boolean> {
-            if (it != null)
-                rlBaseSearch.visibility = View.INVISIBLE
+
         })
     }
 

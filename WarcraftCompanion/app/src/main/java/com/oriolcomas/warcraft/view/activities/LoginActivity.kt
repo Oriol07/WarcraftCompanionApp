@@ -1,7 +1,6 @@
 package com.oriolcomas.warcraft.view.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -9,21 +8,44 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.FacebookSdk
+import com.facebook.appevents.AppEventsLogger
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
+import com.facebook.login.widget.LoginButton
+import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.oriolcomas.warcraft.R
+import com.oriolcomas.warcraft.model.User
+import com.oriolcomas.warcraft.network.FirestoreService
+import java.util.*
+
 
 class LoginActivity : AppCompatActivity() {
 
 
     private lateinit var auth: FirebaseAuth
+    private val callbackManager = CallbackManager.Factory.create()
+
+    //Firestore
+    var firestore = FirestoreService()
+
     //views
     private lateinit var emailEditText: EditText
     private lateinit var passwordEditText: EditText
     private lateinit var registerButton: Button
     private lateinit var loginButton: Button
     private lateinit var progressBar: ProgressBar
+    private lateinit var loginFacebookButton: LoginButton
+
+
 
     public override fun onStart() {
         super.onStart()
@@ -40,6 +62,8 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
         setContentView(R.layout.activity_login)
 
         //Get Firebase Auth
@@ -51,6 +75,11 @@ class LoginActivity : AppCompatActivity() {
         //init Listeners
         initListeners()
 
+
+
+       loginFacebook()
+       // loginManagerFacebook()
+
     }
 
 
@@ -61,6 +90,8 @@ class LoginActivity : AppCompatActivity() {
         registerButton = findViewById<Button>(R.id.btnLogSignup)
         loginButton = findViewById<Button>(R.id.btnLogin)
         progressBar = findViewById<ProgressBar>(R.id.pbLogloading)
+        loginFacebookButton = findViewById<LoginButton>(R.id.btnFacebookLogin);
+        //loginFacebookButton.setReadPermissions("email", "public_profile");
     }
 
 
@@ -114,7 +145,7 @@ class LoginActivity : AppCompatActivity() {
                    finish()
                }
                else {
-                   Log.i("RegisterActivity", "Error: ${it.exception}")
+                   Log.i("LoginActivity", "Error: ${it.exception}")
                    showMessage("Error signing in ${it.exception?.message ?: ""}")
                    progressBar.visibility = View.GONE
                    loginButton.isEnabled = true
@@ -167,6 +198,151 @@ class LoginActivity : AppCompatActivity() {
         Toast.makeText(this, text, Toast.LENGTH_LONG).show()
     }
 
+
+    private fun loginFacebook()
+    {
+
+
+        loginFacebookButton.setPermissions("email", "public_profile")
+
+        // Callback registration
+        loginFacebookButton.registerCallback(callbackManager, object : FacebookCallback<LoginResult?> {
+            override fun onSuccess(loginResult: LoginResult?) {
+                // App code
+                Log.d("FacebookLogin", "facebook:onSuccess:$loginResult")
+                //changeToMainActivity()
+                // handleFacebookAccessToken(loginResult.accessToken)
+                loginResult?.let{
+                    val token = it.accessToken
+                    val credential = FacebookAuthProvider.getCredential(token.token)
+
+                    FirebaseAuth.getInstance().signInWithCredential(credential).addOnCompleteListener{
+                        if (it.isSuccessful) {
+                            Log.i("FacebookLogin", "User Loged!")
+                            showMessage("Welcome!")
+                            //val intent = Intent(this, MainActivity::class.java)
+                            //startActivity(intent)
+                            auth.currentUser?.uid?.let { userId ->
+                                if (!firestore.checkIfUserExist(userId)) {
+                                    Log.d("FacebookLogin", "User created")
+                                    var userFire : FirebaseUser? = auth.currentUser
+                                    // Create User Model
+                                    var user = User()
+                                    user.userId = userId
+                                    if (userFire != null) {
+                                        user.username = userFire.displayName.toString()
+                                    }
+                                    else user.username = "No name"
+                                    user.avatar = "https://media.mmo-champion.com/images/news/2018/february/WoWIcon17.jpg"
+                                    showMessage("Welcome!")
+                                    firestore.setNewUser(user)
+                                }
+                            }
+                            changeToMainActivity()
+                        }
+                        else {
+                            Log.i("FacebookLogin", "Error: ${it.exception}")
+                            showMessage("Error signing in ${it.exception?.message ?: ""}")
+
+                        }
+                    }
+
+                }
+
+            }
+
+            override fun onCancel() {
+                // App code
+                Log.d("FacebookLogin", "facebook:onCancel")
+            }
+
+            override fun onError(exception: FacebookException) {
+                // App code
+                Log.d("FacebookLogin", "facebook:onError", exception)
+            }
+        })
+
+    }
+
+    private fun loginManagerFacebook()
+    {
+
+        loginFacebookButton.setPermissions("email", "public_profile")
+
+
+        LoginManager.getInstance().registerCallback(callbackManager,
+            object : FacebookCallback<LoginResult?> {
+                override fun onSuccess(loginResult: LoginResult?) {
+                    // App code
+                    Log.d("FacebookLogin", "facebook:onSuccess:$loginResult")
+                    //changeToMainActivity()
+                   // handleFacebookAccessToken(loginResult.accessToken)
+                    loginResult?.let{
+                        val token = it.accessToken
+                        val credential = FacebookAuthProvider.getCredential(token.token)
+
+                        FirebaseAuth.getInstance().signInWithCredential(credential).addOnCompleteListener{
+                            if (it.isSuccessful) {
+                                Log.i("FacebookLogin", "User Loged!")
+                                showMessage("Welcome!")
+                                //val intent = Intent(this, MainActivity::class.java)
+                                //startActivity(intent)
+                                auth.currentUser?.uid?.let { userId ->
+                                    if (!firestore.checkIfUserExist(userId)) {
+                                        // Create User Model
+                                        var user = User()
+                                        user.userId = userId
+                                        user.username = "asda"
+                                        user.avatar =
+                                            "https://media.mmo-champion.com/images/news/2018/february/WoWIcon17.jpg"
+                                        showMessage("Welcome!")
+                                        firestore.setNewUser(user)
+                                    }
+                                }
+                            }
+                            else {
+                                Log.i("FacebookLogin", "Error: ${it.exception}")
+                                showMessage("Error signing in ${it.exception?.message ?: ""}")
+
+                            }
+                        }
+
+                    }
+
+                }
+
+                override fun onCancel() {
+                    // App code
+                    Log.d("FacebookLogin", "facebook:onCancel")
+                }
+
+                override fun onError(exception: FacebookException) {
+                    // App code
+                    Log.d("FacebookLogin", "facebook:onError", exception)
+                }
+            })
+
+    }
+
+
+    override fun onActivityResult(
+        requestCode: Int,
+        resultCode: Int,
+        data: Intent?
+    ) {
+        callbackManager.onActivityResult(requestCode, resultCode, data)
+        super.onActivityResult(requestCode, resultCode, data)
+
+
+    }
+
+
+    private fun changeToMainActivity()
+    {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
 
 
 }

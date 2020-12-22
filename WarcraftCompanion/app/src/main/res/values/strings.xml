@@ -50,4 +50,9 @@ In addition, questgivers Historian Llore and Historian Ju’pa will have two dai
     <string name="add_post">Post successfully created</string>
     <string name="add_post_error">Something has gone wrong</string>
 
+
+    //Facebook
+    <string name="facebook_app_id">411788996923234</string>
+    <string name="fb_login_protocol_scheme">fb411788996923234</string>
+
 </resources>

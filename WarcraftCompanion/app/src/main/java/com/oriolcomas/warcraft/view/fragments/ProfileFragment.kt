@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.facebook.login.LoginManager
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -71,6 +72,8 @@ class ProfileFragment : Fragment(), ProfileListener {
     private fun initListeners(view: View) {
         ibExit.setOnClickListener {
             Firebase.auth.signOut()
+            LoginManager.getInstance().logOut();
+
             val intent = Intent(activity, LoginActivity::class.java)
             activity?.finish()
             startActivity(intent)

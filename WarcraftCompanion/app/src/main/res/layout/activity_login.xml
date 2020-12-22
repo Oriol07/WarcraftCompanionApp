@@ -96,50 +96,21 @@
         app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
 
     <!--    Facebook -->
-    <ImageButton
-        android:id="@+id/btnFacebookSignUp"
+
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/btnFacebookLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_facebook"
-        android:background="@color/trans"
-
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="@dimen/btn_ggFbTw"
-        app:layout_constraintEnd_toEndOf="@id/btnGoogleSignUp"
-        app:layout_constraintHorizontal_bias="0.497"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="40dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnLogSignup" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnLogSignup"
+        />
 
     <!--    Google -->
 
-    <ImageButton
-        android:id="@+id/btnGoogleSignUp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_google"
-        android:background="@color/trans"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="@dimen/btn_ggFbTw"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintEnd_toEndOf="@id/btnTwitterSignUp"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="@id/btnFacebookSignUp"
-        app:layout_constraintTop_toBottomOf="@+id/btnLogSignup" />
-
-    <!--    Twitter -->
-    <ImageButton
-        android:id="@+id/btnTwitterSignUp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_twitter_social_icon_circle_color"
-        android:background="@color/trans"
-
-        android:layout_marginTop="@dimen/btn_ggFbTw"
-        android:layout_marginEnd="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="@id/btnGoogleSignUp"
-        app:layout_constraintTop_toBottomOf="@+id/btnLogSignup" />
 
     <ProgressBar
         android:id="@+id/pbLogloading"

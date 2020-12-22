@@ -143,5 +143,20 @@ class FirestoreService  {
         return ""
     }
 
+    fun checkIfUserExist(id: String): Boolean
+    {
+        var exist = false
+        firebaseFirestore.collection(USERS_COLLECTION_NAME)
+            .document(id)
+            .get()
+            .addOnSuccessListener {
+                doc ->
+                exist = doc.exists();
+
+            }
+
+        return exist;
+    }
+
 
 }

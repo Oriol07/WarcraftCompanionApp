@@ -15,6 +15,9 @@ import com.google.firebase.ktx.Firebase
 import com.oriolcomas.warcraft.R
 import com.oriolcomas.warcraft.model.User
 import com.oriolcomas.warcraft.network.FirestoreService
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
+
 
 class RegisterActivity : AppCompatActivity() {
 

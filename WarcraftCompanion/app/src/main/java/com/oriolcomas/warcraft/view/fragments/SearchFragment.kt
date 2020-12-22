@@ -76,10 +76,9 @@ class SearchFragment : Fragment(){
 
     fun observeViewModel()
     {
-        viewModel.listUsers.observe(this, Observer<List<User>>{ post -> searchAdapter.updateData(post)})
+        viewModel.listUsers.observe(this, Observer<List<User>>{ user -> searchAdapter.updateData(user)})
         viewModel.isLoading.observe(this, Observer<Boolean> {
-            if (it != null)
-                rlBaseSearch.visibility = View.INVISIBLE
+
         })
     }
 

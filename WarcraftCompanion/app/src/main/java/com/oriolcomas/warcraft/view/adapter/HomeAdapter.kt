@@ -20,7 +20,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class HomeAdapter(val homeListener: HomeListener) : RecyclerView.Adapter<HomeAdapter.ViewHolder>(){
+class HomeAdapter() : RecyclerView.Adapter<HomeAdapter.ViewHolder>(){
 
     var listPosts = ArrayList<Post>()
 
@@ -50,8 +50,6 @@ class HomeAdapter(val homeListener: HomeListener) : RecyclerView.Adapter<HomeAda
 
         }
 
-        val simpleDateFormat = ("HH:mm")
-
         val cal = Calendar.getInstance()
         cal.time = post.date
 
@@ -62,12 +60,6 @@ class HomeAdapter(val homeListener: HomeListener) : RecyclerView.Adapter<HomeAda
         Glide.with(holder.itemView.context)
             .load(post.image)
             .into(holder.ivImagePost)
-
-
-        holder.itemView.setOnClickListener{
-            //TODO al fer click anar a perfil
-            homeListener.onHomeClicked(post, position)
-        }
 
 
 

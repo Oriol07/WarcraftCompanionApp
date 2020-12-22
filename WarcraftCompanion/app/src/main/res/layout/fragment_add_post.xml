@@ -26,9 +26,7 @@
         app:layout_constraintTop_toTopOf="parent"
         />
 
-    <!--    Email -->
-
-
+    <!--    Title -->
 
     <EditText
         android:id="@+id/etTitlePost"
@@ -41,14 +39,14 @@
         android:hint="@string/prompt_title"
         android:textColorHint="@color/colorHintText"
         android:shadowColor="@color/colorViewComments"
-        android:inputType="textEmailAddress"
+        android:inputType="text"
         android:selectAllOnFocus="true"
         android:lines="1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/logo" />
 
-    <!--    Username -->
+    <!--    Image link -->
 
     <EditText
         android:id="@+id/etImageLink"
@@ -63,6 +61,7 @@
         android:shadowColor="@color/colorViewComments"
         android:selectAllOnFocus="true"
         android:lines="1"
+        android:inputType="textWebEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etTitlePost"

@@ -36,7 +36,17 @@
         android:id="@+id/navAddPostFragment"
         android:name="com.oriolcomas.warcraft.view.fragments.AddPostFragment"
         android:label="fragment_add_post"
-        tools:layout="@layout/fragment_add_post" />
+        tools:layout="@layout/fragment_add_post" >
+        <action
+            android:id="@+id/action_navAddPostFragment_to_searchFragment"
+            app:destination="@id/navSearchFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/navSearchFragment"
+        android:name="com.oriolcomas.warcraft.view.fragments.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search"
+        />
 
 
 </navigation>

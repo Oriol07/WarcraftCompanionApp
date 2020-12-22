@@ -54,6 +54,30 @@ class FirestoreService  {
                 }
             }
     }
+    fun getUsersWithString(s :String, callback: Callback<List<User>>)
+    {
+        firebaseFirestore.collection(USERS_COLLECTION_NAME)
+            .whereGreaterThanOrEqualTo("username", s)
+            .whereLessThan("username", s + 'z')
+            .get()
+            .addOnSuccessListener { result ->
+                for (doc in result) {
+                    val list = result.toObjects(User::class.java)
+                    callback.onSuccess(list)
+                    if (list != null) {
+                        list.forEach {
+                            Log.i("SearchNetwork", "Username = ${it.username}")
+                        }
+                    } else {
+                        Log.i("SearchNetwork", "error")
+                    }
+
+                    break
+                }
+                }
+
+    }
+
 
     fun getUserPosts(callback: Callback<List<Post>>)
     {

@@ -39,7 +39,7 @@ In addition, questgivers Historian Llore and Historian Ju’pa will have two dai
     <string name="incorrect_password">Password is not correct</string>
     <string name="login_failed">"Login failed"</string>
 
-<!--    FER POST-->
+    <!--    FER POST-->
 
     <string name="info_post_image">Images must be .png, .gif or .jpg files.</string>
     <string name="prompt_image">example.com/images/file.jpg</string>

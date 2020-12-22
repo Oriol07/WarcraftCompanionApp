@@ -13,7 +13,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class ProfileAdapter(val profileListener: ProfileListener) : RecyclerView.Adapter<ProfileAdapter.ViewHolder>(){
+class ProfileAdapter() : RecyclerView.Adapter<ProfileAdapter.ViewHolder>(){
     var listPosts = ArrayList<Post>()
 
     //Crear o decir cual sera el diseño usado para nuestras listas // En aquest cas volem el disseny del layout item_post.xml
@@ -36,9 +36,7 @@ class ProfileAdapter(val profileListener: ProfileListener) : RecyclerView.Adapte
             //.apply(RequestOptions.circleCropTransform()) //Aixó per la foto del Usuari no d'aquest
             .into(holder.ivImagePost)
 
-        holder.itemView.setOnClickListener{
-            profileListener.onHomeClicked(post, position)
-        }
+
 
     }
 

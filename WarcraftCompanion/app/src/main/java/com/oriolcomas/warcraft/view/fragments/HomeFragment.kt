@@ -7,21 +7,19 @@ import android.view.View
 import android.view.ViewGroup
 
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.oriolcomas.warcraft.R
 import com.oriolcomas.warcraft.model.Post
 import com.oriolcomas.warcraft.view.adapter.HomeAdapter
-import com.oriolcomas.warcraft.view.adapter.HomeListener
 import com.oriolcomas.warcraft.viewmodel.HomeViewModel
 import kotlinx.android.synthetic.main.fragment_home.*
 
 /**
  * A simple [Fragment] subclass.
  */
-class HomeFragment : Fragment(), HomeListener{
+class HomeFragment : Fragment(){
 
     private lateinit var homeAdapter: HomeAdapter
     private lateinit var viewModel: HomeViewModel
@@ -36,7 +34,7 @@ class HomeFragment : Fragment(), HomeListener{
 
         viewModel.refresh()
 
-        homeAdapter = HomeAdapter(this)
+        homeAdapter = HomeAdapter()
 
         rvPost.apply {
             layoutManager = LinearLayoutManager(view.context, LinearLayoutManager.VERTICAL, false)

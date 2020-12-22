@@ -26,13 +26,12 @@ import com.oriolcomas.warcraft.network.FirestoreService
 import com.oriolcomas.warcraft.view.activities.LoginActivity
 import com.oriolcomas.warcraft.view.activities.MainActivity
 import com.oriolcomas.warcraft.view.adapter.ProfileAdapter
-import com.oriolcomas.warcraft.view.adapter.ProfileListener
 import com.oriolcomas.warcraft.viewmodel.ProfileViewModel
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_profile.*
 
 
-class ProfileFragment : Fragment(), ProfileListener {
+class ProfileFragment : Fragment(){
     private lateinit var profileAdapter: ProfileAdapter
     private lateinit var viewModel: ProfileViewModel
 
@@ -56,7 +55,7 @@ class ProfileFragment : Fragment(), ProfileListener {
 
         viewModel.refresh()
 
-        profileAdapter = ProfileAdapter(this)
+        profileAdapter = ProfileAdapter()
 
         rvProfilePost.apply {
             layoutManager = LinearLayoutManager(view.context, LinearLayoutManager.VERTICAL, false)

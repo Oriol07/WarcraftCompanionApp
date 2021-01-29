@@ -8,7 +8,9 @@
     app:cardCornerRadius="@dimen/cv_default_radius"
     app:cardElevation="@dimen/cv_default_elevation"
     android:layout_margin="@dimen/l_default_margin"
-    tools:context=".view.fragments.SearchProfileDialog">
+    tools:context=".view.fragments.SearchProfileDialog"
+    android:background="@color/colorSecondary"
+    >
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"

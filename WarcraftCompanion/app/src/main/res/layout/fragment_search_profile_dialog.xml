@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="@dimen/cv_default_radius"
+    app:cardElevation="@dimen/cv_default_elevation"
+    android:layout_margin="@dimen/l_default_margin"
+    tools:context=".view.fragments.SearchProfileDialog">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints"
+        android:background="@color/colorSecondary"
+        >
+        <Toolbar
+            android:id="@+id/toolbarSpeakers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="@dimen/l_default_margin"
+                >
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    >
+
+                    <ImageView
+                        android:id="@+id/ivProfileUserAvatar"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:src="@drawable/ic_account"
+                        />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="10dp"
+                    >
+
+                    <TextView
+                        android:id="@+id/tvProfileUsername"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:text="Title_placeholder"
+                        android:textSize="@dimen/tv_default_title_post"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorViewComments"
+                        />
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+
+
+        </Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+        <LinearLayout
+            android:id="@+id/llProfile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="@dimen/l_default_margin"
+            app:layout_constraintTop_toTopOf="parent"
+            >
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorPrimary"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                >
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvProfilePost"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    />
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+        <RelativeLayout
+            android:id="@+id/rlBaseProfile"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toBottomOf="@id/llProfile"
+            app:layout_constraintBottom_toTopOf="parent"
+
+            >
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                />
+        </RelativeLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>

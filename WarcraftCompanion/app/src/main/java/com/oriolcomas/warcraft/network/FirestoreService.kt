@@ -175,5 +175,19 @@ class FirestoreService  {
         return exist;
     }
 
+    fun UpdateAvatar(avatar: String, callback: Callback<String>)
+    {
+        firebaseFirestore.collection(USERS_COLLECTION_NAME)
+            .document(getCurrentUserId())
+            .update("avatar", avatar)
+            .addOnSuccessListener {
+                Log.d("SetNewAvatar", "Avatar successfully created!")
+                callback.onSuccess(avatar)
+            }
+            .addOnFailureListener {
+                    e -> Log.w("SetNewAvatar", "Error creating document", e)
+                callback.onFailed(e);
+            }
+    }
 
 }

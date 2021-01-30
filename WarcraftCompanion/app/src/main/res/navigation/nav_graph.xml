@@ -31,6 +31,9 @@
         <action
             android:id="@+id/action_navProfileFragment_to_addPostFragment"
             app:destination="@id/navAddPostFragment" />
+        <action
+            android:id="@+id/action_navProfileFragment_to_usernameDialog"
+            app:destination="@id/usernameDialog" />
     </fragment>
     <fragment
         android:id="@+id/navAddPostFragment"
@@ -63,6 +66,10 @@
         android:id="@+id/streamsFragment"
         android:name="com.oriolcomas.warcraft.view.fragments.StreamsFragment"
         android:label="StreamsFragment" />
+    <dialog
+        android:id="@+id/usernameDialog"
+        android:name="com.oriolcomas.warcraft.view.fragments.usernameDialog"
+        android:label="usernameDialog" />
 
 
 </navigation>

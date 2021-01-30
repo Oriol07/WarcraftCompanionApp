@@ -59,4 +59,8 @@ In addition, questgivers Historian Llore and Historian Ju’pa will have two dai
     //TWITCH
     <string name="twitch_connected">You are connected with twitch!</string>
 
+    //AVATAR
+    <string name="new_avatar"> Change avatar!</string>
+    <string name="add_avatar"> Avatar successfully changed</string>
+
 </resources>

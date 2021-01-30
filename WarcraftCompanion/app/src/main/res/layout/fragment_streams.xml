@@ -39,6 +39,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:textAlignment="center"
+        android:textSize="@dimen/twitch_description"
         android:text="@string/twitch_connected"
         android:visibility="gone"
         android:textColor="@color/colorTwitch"

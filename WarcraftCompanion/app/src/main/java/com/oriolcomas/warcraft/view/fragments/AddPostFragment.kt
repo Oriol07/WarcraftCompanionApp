@@ -63,7 +63,7 @@ class AddPostFragment : Fragment() {
             if (!isImageValid(image))
             {
                 Log.i("AddPostFragment", "Image is not valid")
-                itemView.findViewById<EditText>(R.id.etImageLink).error = getString (R.string.invalid_title)
+                itemView.findViewById<EditText>(R.id.etImageLink).error = getString (R.string.invalid_image)
                 return@setOnClickListener
             }
 

@@ -9,6 +9,7 @@
     <color name="colorHintText">#AEAAAA</color>
 
     <color name="colorWhite">#FFFF</color>
+    <color name="colorTwitch">#6441a5</color>
 
     <color name="trans">#00000000 </color>
 </resources>

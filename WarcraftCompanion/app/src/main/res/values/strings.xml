@@ -32,6 +32,7 @@ In addition, questgivers Historian Llore and Historian Ju’pa will have two dai
     <string name="prompt_username">Username</string>
     <string name="prompt_password">Password</string>
     <string name="action_log_in">Log in</string>
+    <string name="action_log_in_Twitch">Log in with Twitch</string>
     <string name="action_sign_up">Sign up</string>
     <string name="welcome">"Welcome !"</string>
     <string name="invalid_username">Not a valid email</string>
@@ -54,5 +55,12 @@ In addition, questgivers Historian Llore and Historian Ju’pa will have two dai
     //Facebook
     <string name="facebook_app_id">411788996923234</string>
     <string name="fb_login_protocol_scheme">fb411788996923234</string>
+
+    //TWITCH
+    <string name="twitch_connected">You are connected with twitch!</string>
+
+    //AVATAR
+    <string name="new_avatar"> Change avatar!</string>
+    <string name="add_avatar"> Avatar successfully changed</string>
 
 </resources>

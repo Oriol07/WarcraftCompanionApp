@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorSecondary"
+    >
+
+<!--    Canviar a Twitch logo-->
+    <ImageView
+        android:id="@+id/ivLogoTwitch"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:src="@drawable/twitch_logo"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <Button
+        android:id="@+id/btnTwitchLogin"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="@string/action_log_in_Twitch"
+        android:textColor="@color/colorSecondary"
+        android:background="@color/colorTwitch"
+        />
+    <TextView
+        android:id="@+id/tvTwitchConnected"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:textAlignment="center"
+        android:textSize="@dimen/twitch_description"
+        android:text="@string/twitch_connected"
+        android:visibility="gone"
+        android:textColor="@color/colorTwitch"
+        />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvStreams"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivLogoTwitch"
+    />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

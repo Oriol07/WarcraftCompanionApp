@@ -13,6 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".view.activities.TwitchLoginActivity"></activity>
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
@@ -43,13 +44,11 @@
         </activity>
         <activity android:name=".view.activities.MainActivity" />
         <activity android:name=".view.activities.LoginActivity" />
-        <activity android:name=".view.activities.RegisterActivity"></activity>
+        <activity android:name=".view.activities.RegisterActivity" />
+
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-4039443793441460~2725140610"/>
-
-
-
+            android:value="ca-app-pub-4039443793441460~2725140610" />
     </application>
 
 </manifest>

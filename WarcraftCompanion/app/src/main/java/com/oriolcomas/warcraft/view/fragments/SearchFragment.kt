@@ -9,8 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageButton
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.facebook.login.LoginManager
 import com.google.firebase.analytics.ktx.analytics
@@ -20,12 +22,13 @@ import com.oriolcomas.warcraft.R
 import com.oriolcomas.warcraft.model.User
 import com.oriolcomas.warcraft.view.activities.LoginActivity
 import com.oriolcomas.warcraft.view.adapter.SearchAdapter
+import com.oriolcomas.warcraft.view.adapter.SearchListener
 import com.oriolcomas.warcraft.viewmodel.SearchViewModel
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_search.*
 
 
-class SearchFragment : Fragment(){
+class SearchFragment : Fragment(), SearchListener{
 
     private lateinit var searchAdapter: SearchAdapter
     private lateinit var viewModel: SearchViewModel
@@ -45,7 +48,7 @@ class SearchFragment : Fragment(){
 
 
 
-        searchAdapter = SearchAdapter()
+        searchAdapter = SearchAdapter(this)
 
         rvSearchUsername.apply {
             layoutManager = LinearLayoutManager(view.context, LinearLayoutManager.VERTICAL, false)
@@ -80,6 +83,13 @@ class SearchFragment : Fragment(){
         viewModel.isLoading.observe(this, Observer<Boolean> {
 
         })
+
+    }
+
+    override fun onUserClicked(user: User, position: Int) {
+        super.onUserClicked(user, position)
+        val bundle = bundleOf("user" to user)
+        findNavController().navigate(R.id.searchProfileDialog, bundle)
     }
 
 }

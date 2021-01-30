@@ -12,6 +12,7 @@ import android.widget.*
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -54,7 +55,9 @@ class ProfileFragment : Fragment(){
 
         viewModel = ViewModelProviders.of(this).get(ProfileViewModel::class.java)
 
+        viewModel.setUserID(firestoreService.getCurrentUserId())
         viewModel.refresh()
+
 
         profileAdapter = ProfileAdapter()
 
@@ -78,6 +81,9 @@ class ProfileFragment : Fragment(){
             val intent = Intent(activity, LoginActivity::class.java)
             activity?.finish()
             startActivity(intent)
+        }
+        ivProfileUserAvatar.setOnClickListener{
+            findNavController().navigate(R.id.usernameDialog)
         }
     }
 

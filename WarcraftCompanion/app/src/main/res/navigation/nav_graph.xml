@@ -31,6 +31,9 @@
         <action
             android:id="@+id/action_navProfileFragment_to_addPostFragment"
             app:destination="@id/navAddPostFragment" />
+        <action
+            android:id="@+id/action_navProfileFragment_to_usernameDialog"
+            app:destination="@id/usernameDialog" />
     </fragment>
     <fragment
         android:id="@+id/navAddPostFragment"
@@ -46,7 +49,27 @@
         android:name="com.oriolcomas.warcraft.view.fragments.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search"
-        />
+        >
+        <action
+            android:id="@+id/action_navSearchFragment_to_searchProfileDialog"
+            app:destination="@id/searchProfileDialog" />
+        <action
+            android:id="@+id/action_navSearchFragment_to_streamsFragment"
+            app:destination="@id/streamsFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/searchProfileDialog"
+        android:name="com.oriolcomas.warcraft.view.fragments.SearchProfileDialog"
+        android:label="fragment_search_profile_dialog"
+        tools:layout="@layout/fragment_search_profile_dialog" />
+    <fragment
+        android:id="@+id/streamsFragment"
+        android:name="com.oriolcomas.warcraft.view.fragments.StreamsFragment"
+        android:label="StreamsFragment" />
+    <dialog
+        android:id="@+id/usernameDialog"
+        android:name="com.oriolcomas.warcraft.view.fragments.usernameDialog"
+        android:label="usernameDialog" />
 
 
 </navigation>

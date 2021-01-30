@@ -56,4 +56,7 @@ In addition, questgivers Historian Llore and Historian Ju’pa will have two dai
     <string name="facebook_app_id">411788996923234</string>
     <string name="fb_login_protocol_scheme">fb411788996923234</string>
 
+    //TWITCH
+    <string name="twitch_connected">You are connected with twitch!</string>
+
 </resources>

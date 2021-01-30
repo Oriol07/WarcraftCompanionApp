@@ -72,11 +72,11 @@ class FirestoreService  {
     }
 
 
-    fun getUserPosts(callback: Callback<List<Post>>)
+    fun getUserPosts(userId: String,callback: Callback<List<Post>>)
     {
         firebaseFirestore
             .collection(POSTS_COLLECTION_NAME)
-            .whereEqualTo("userId", getCurrentUserId())
+            .whereEqualTo("userId", userId)
             .orderBy("date", Query.Direction.DESCENDING)
             .get()
             .addOnSuccessListener { result ->

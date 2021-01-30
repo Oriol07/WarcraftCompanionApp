@@ -16,7 +16,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class SearchAdapter() : RecyclerView.Adapter<SearchAdapter.ViewHolder>(){
+class SearchAdapter(val searchListener: SearchListener) : RecyclerView.Adapter<SearchAdapter.ViewHolder>(){
 
     var listUsers = ArrayList<User>()
 
@@ -38,6 +38,10 @@ class SearchAdapter() : RecyclerView.Adapter<SearchAdapter.ViewHolder>(){
                 .load(users.avatar)
                 .apply(RequestOptions.circleCropTransform()) // posar forma circular
                 .into(holder.ivSearchUserProfile)
+        holder.itemView.setOnClickListener{
+            searchListener.onUserClicked(users, position)
+        }
+
     }
 
     fun updateData(data: List<User>)
@@ -53,6 +57,8 @@ class SearchAdapter() : RecyclerView.Adapter<SearchAdapter.ViewHolder>(){
         var tvSearchUsername = itemView.findViewById<TextView>(R.id.tvSearchUsername)
         var ivSearchUserProfile = itemView.findViewById<ImageView>(R.id.ivSearchUserProfile)
     }
+
+
 
 
 

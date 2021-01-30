@@ -8,18 +8,19 @@ import com.oriolcomas.warcraft.network.FirestoreService
 import java.lang.Exception
 
 
-class ProfileViewModel : ViewModel() {
+class ProfileViewModel() : ViewModel() {
     val firestoreService = FirestoreService()
     var listPosts: MutableLiveData<List<Post>> = MutableLiveData()
 
     var isLoading = MutableLiveData<Boolean>()
+    private lateinit var userId: String
 
     fun refresh() {
         getUserPostsFromFirebase()
     }
 
     private fun getUserPostsFromFirebase() {
-        firestoreService.getUserPosts(object: Callback<List<Post>> {
+        firestoreService.getUserPosts(userId, object: Callback<List<Post>> {
             override fun onSuccess(result: List<Post>?) {
                 listPosts.postValue(result)
                 processFinished()
@@ -31,7 +32,10 @@ class ProfileViewModel : ViewModel() {
         })
     }
 
-
+    fun setUserID(id: String)
+    {
+        userId = id
+    }
 
     fun processFinished()
     {

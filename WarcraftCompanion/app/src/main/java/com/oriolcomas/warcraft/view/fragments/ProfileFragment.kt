@@ -54,7 +54,9 @@ class ProfileFragment : Fragment(){
 
         viewModel = ViewModelProviders.of(this).get(ProfileViewModel::class.java)
 
+        viewModel.setUserID(firestoreService.getCurrentUserId())
         viewModel.refresh()
+
 
         profileAdapter = ProfileAdapter()
 

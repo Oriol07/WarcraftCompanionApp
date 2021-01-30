@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.ImageButton
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
@@ -51,6 +52,7 @@ class MainActivity : AppCompatActivity() {
             val transaction = supportFragmentManager.beginTransaction()
             transaction.replace(R.id.fragContent, StreamsFragment())
             transaction.commit();
+           // findNavController(it.id).navigate(R.id.streamsFragment)
         }
 
     }

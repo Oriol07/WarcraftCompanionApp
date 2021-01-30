@@ -17,9 +17,10 @@
         android:layout_height="wrap_content"
         tools:ignore="MissingConstraints"
         android:background="@color/colorSecondary"
+        android:id="@+id/apptb"
         >
         <Toolbar
-            android:id="@+id/toolbarSpeakers"
+            android:id="@+id/toolbarProfile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             >
@@ -81,7 +82,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_margin="@dimen/l_default_margin"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/apptb"
             >
 
             <View
@@ -108,7 +109,7 @@
 
         </LinearLayout>
         <RelativeLayout
-            android:id="@+id/rlBaseProfile"
+            android:id="@+id/rlBaseSearch"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintTop_toBottomOf="@id/llProfile"

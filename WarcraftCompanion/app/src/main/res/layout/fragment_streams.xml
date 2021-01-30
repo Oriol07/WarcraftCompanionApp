@@ -10,9 +10,9 @@
     <ImageView
         android:id="@+id/ivLogoTwitch"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:src="@drawable/world_of_warcraft_logo"
-        android:layout_marginTop="50dp"
+        android:layout_height="100dp"
+        android:src="@drawable/twitch_logo"
+        android:layout_marginTop="12dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintStart_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivLogoTwitch"
     />
 
 

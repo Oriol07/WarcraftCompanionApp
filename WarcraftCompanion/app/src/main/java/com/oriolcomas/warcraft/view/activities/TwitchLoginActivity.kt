@@ -8,17 +8,22 @@ import android.view.View
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import androidx.lifecycle.lifecycleScope
 import com.oriolcomas.warcraft.R
 import com.oriolcomas.warcraft.model.Constants
+import com.oriolcomas.warcraft.model.OAuthTokensResponse
+import com.oriolcomas.warcraft.network.NetworkManager
+import com.oriolcomas.warcraft.network.UserManager
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.okhttp.OkHttp
+import io.ktor.client.features.json.JsonFeature
+import io.ktor.client.features.json.serializer.KotlinxSerializer
 import io.ktor.client.request.parameter
 import io.ktor.client.request.post
-import io.ktor.client.statement.HttpStatement
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlinx.serialization.json.Json
 
 class TwitchLoginActivity : AppCompatActivity() {
 
@@ -93,29 +98,38 @@ class TwitchLoginActivity : AppCompatActivity() {
 
     private fun getAccessTokens(authorizationCode: String)
     {
-        val httpClient = HttpClient(OkHttp)
 
-      /*  POST https://id.twitch.tv/oauth2/token
-        ?client_id=<your client ID>
-        &client_secret=<your client secret>
-        &code=<authorization code received above>
-        &grant_type=authorization_code
-        &redirect_uri=<your registered redirect URI> */
+        Log.i(TAG, "Getting access tokens with authorizationCode $authorizationCode")
 
-        GlobalScope.launch {
+        val httpClient = NetworkManager.createHttpClient()
+
+        lifecycleScope.launch {
+            Log.i(TAG, "Launching get Tokens request")
 
             //Change to Background thread
             withContext(Dispatchers.IO) {
-                val response = httpClient.post<String>("https://id.twitch.tv/oauth2/token")
+                try {
+                    val response =
+                        httpClient.post<OAuthTokensResponse>("https://id.twitch.tv/oauth2/token")
+                        {
+                            parameter("client_id", Constants.OAUTH_CLIENT_ID)
+                            parameter("client_secret", Constants.OAUTH_CLIENT_SECRET)
+                            parameter("code", authorizationCode)
+                            parameter("grant_type", "authorization_code")
+                            parameter("redirect_uri", Constants.OAUTH_REDIRECT_URI)
+                        }
+                    Log.i(TAG, "Got response from Twitch: $response")
+                    UserManager(this@TwitchLoginActivity)
+                        .saveAccessToken(response.accessToken)
+
+                    finish()
+                }catch(t: Throwable)
                 {
-                    parameter("client_id", Constants.OAUTH_CLIENT_ID)
-                    parameter("client_secret", Constants.OAUTH_CLIENT_SECRET)
-                    parameter("code", authorizationCode)
-                    parameter("grant_type", "authorization_code")
-                    parameter("redirect_uri", Constants.OAUTH_REDIRECT_URI)
+                    Log.e(TAG, "error Coroutine")
                 }
-                Log.i(TAG, "Got response from Twitch: $response")
+
             }
+
         }
     }
 }
